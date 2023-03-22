@@ -1,33 +1,50 @@
 function generateCitation() {
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    const tab = tabs[0];
-    const url = tab.url;
-    const title = tab.title;
-    const accessDate = new Date().toISOString().slice(0, 10);
+  const inputUrl = document.getElementById("inputUrl").value;
 
-    fetch(url)
-      .then((response) => response.text())
-      .then((html) => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, "text/html");
+  if (!inputUrl) {
+    alert("Please enter a URL.");
+    return;
+  }
 
-        const author = doc.querySelector("meta[name='author']")
-          ? doc.querySelector("meta[name='author']").content
-          : "Unknown Author";
+  const url = new URL(inputUrl);
+  const title = url.pathname;
+  const accessDate = new Date().toISOString().slice(0, 10);
 
-        const publisher = doc.querySelector("meta[name='publisher']")
-          ? doc.querySelector("meta[name='publisher']").content
-          : doc.querySelector("title")
-          ? doc.querySelector("title").textContent
-          : "Unknown Publisher";
+  fetch(url)
+    .then((response) => response.text())
+    .then((html) => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, "text/html");
 
-        const citation = `[${author}. "${title}" (${publisher}).](${url}) Retrieved ${accessDate}.`;
-        document.getElementById("citation").innerText = citation;
-      })
-      .catch((error) => {
-        console.error("Error fetching the webpage:", error);
-      });
-  });
+      const author = doc.querySelector("meta[name='author']")
+        ? doc.querySelector("meta[name='author']").content
+        : "Unknown Author";
+
+      const publisher = doc.querySelector("meta[name='publisher']")
+        ? doc.querySelector("meta[name='publisher']").content
+        : doc.querySelector("title")
+        ? doc.querySelector("title").textContent
+        : "Unknown Publisher";
+
+      const citation = `[${author}. "${title}" (${publisher}).](${url}) Retrieved ${accessDate}.`;
+      document.getElementById("citation").innerText = citation;
+      document.getElementById("copy").disabled = false;
+    })
+    .catch((error) => {
+      console.error("Error fetching the webpage:", error);
+    });
+}
+
+function copyCitation() {
+  const citation = document.getElementById("citation");
+  const textArea = document.createElement("textarea");
+  textArea.value = citation.innerText;
+  document.body.appendChild(textArea);
+  textArea.select();
+  document.execCommand("copy");
+  document.body.removeChild(textArea);
+  alert("Citation copied to clipboard!");
 }
 
 document.getElementById("generate").addEventListener("click", generateCitation);
+document.getElementById("copy").addEventListener("click", copyCitation);
