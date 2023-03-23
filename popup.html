@@ -3,18 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Wikipedia Citation Generator</title>
+    <title>Citation Generator</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>Wikipedia Citation Generator</h1>
+    <h1>Citation Generator</h1>
     <label for="inputUrl">URL:</label>
     <input type="text" id="inputUrl" placeholder="Enter the URL" />
-    <button id="generate">Generate Citation</button>
-    <div id="citation-container">
+    <div id="citation-container" class="form-group">
+      <div>
+        <label for="authorInput">Author:</label>
+        <input type="text" id="authorInput" />
+      </div>
+      <div>
+        <label for="titleInput">Title:</label>
+        <input type="text" id="titleInput" />
+      </div>
+      <div>
+        <label for="dateInput">Date:</label>
+        <input type="text" id="dateInput" />
+      </div>
+      <div>
+        <label for="publisherInput">Publisher:</label>
+        <input type="text" id="publisherInput" />
+      </div>
       <pre id="citation"></pre>
     </div>
-    <button id="copy" disabled>Copy Citation</button>
+    <button id="copy" class="copy-btn, btn" disabled>Copy Citation</button>
     <script src="popup.js"></script>
   </body>
 </html>

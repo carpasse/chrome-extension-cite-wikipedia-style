@@ -1,49 +1,134 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 15px;
-}
-
-h1 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-input {
-  width: 100%;
-  padding: 6px 12px;
-  margin: 8px 0;
+/* Box sizing rule */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-button {
-  background-color: #007bff;
-  color: white;
-  padding: 8px 16px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+/* Body rules */
+body {
+  margin: 0;
+  padding: 1rem;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  background-color: #f5f5f5;
+}
+
+/* Container rules */
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.24);
   border-radius: 4px;
 }
 
-button:hover {
-  background-color: #0056b3;
+/* Title rules */
+h1 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #212121;
 }
 
-button:disabled {
-  background-color: #cccccc;
+/* Form rules */
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #212121;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #1976d2;
+  border-radius: 4px;
+  background-color: #f5f5f5;
+  font-size: 16px;
+  color: #212121;
+  transition: background-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  background-color: #fff;
+  border: 1px solid #1976d2;
+}
+
+/* Button rules */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 10px;
+  background-color: #1976d2;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #1565c0;
+}
+
+.btn:disabled {
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
-#citation-container {
-  background-color: #f8f9fa;
-  border: 1px solid #ced4da;
+/* Citation container rules */
+.citation-container {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f5f5f5;
   border-radius: 4px;
-  padding: 15px;
-  margin: 8px 0;
-  white-space: pre-wrap;
-  word-break: break-word;
+}
+
+.citation-container p {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  color: #212121;
+}
+
+/* Copy button rules */
+.copy-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-left: 20px;
+  background-color: #1976d2;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.copy-btn:hover {
+  background-color: #1565c0;
+}
+
+.copy-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
