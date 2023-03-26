@@ -17,12 +17,11 @@
     "chrome",
     "extension"
   ],
-  "author": "Carpasse <carpasse@gmail.com>",
+  "author": "carpasse <carpasse@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/carpasse/citation-generator/issues"
   },
   "homepage": "https://github.com/carpasse/citation-generator#readme",
-  "dependencies": {},
   "devDependencies": {}
 }
