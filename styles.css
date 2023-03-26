@@ -132,3 +132,13 @@ input[type="text"]:focus {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+.hidden {
+  display: none;
+}
+
+#copyMessage {
+  color: green;
+  font-weight: bold;
+  margin-top: 10px;
+}

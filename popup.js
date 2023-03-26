@@ -53,7 +53,7 @@ function generateCitation() {
 
       const citation = `[${author}. "${title}"${
         publisher ? ` (${publisher})` : ""
-      }.](${url}) Retrieved ${accessDate}.`;
+      }.](${url}) Accessed at ${accessDate}.`;
 
       document.getElementById("authorInput").value = author;
       document.getElementById("titleInput").value = title;
@@ -66,19 +66,21 @@ function generateCitation() {
     });
 }
 
-function copyCitation() {
-  const author = document.getElementById("authorInput").value;
-  const title = document.getElementById("titleInput").value;
-  const date = document.getElementById("dateInput").value;
-  const citation = `[${author}. "${title}." (${date}).]`;
+async function copyCitation() {
+  const citationElement = document.getElementById("citation");
+  const citation = citationElement.innerText;
+  const copyMessage = document.getElementById("copyMessage");
 
-  const textArea = document.createElement("textarea");
-  textArea.value = citation;
-  document.body.appendChild(textArea);
-  textArea.select();
-  document.execCommand("copy");
-  document.body.removeChild(textArea);
-  alert("Citation copied to clipboard!");
+  try {
+    await navigator.clipboard.writeText(citation);
+    copyMessage.textContent = "Citation copied to clipboard!";
+    copyMessage.classList.remove("hidden");
+    setTimeout(() => {
+      copyMessage.classList.add("hidden");
+    }, 3000); // Hide the message after 3 seconds
+  } catch (err) {
+    console.error("Failed to copy text: ", err);
+  }
 }
 
 document.getElementById("copy").addEventListener("click", copyCitation);
