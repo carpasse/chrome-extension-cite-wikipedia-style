@@ -1,0 +1,28 @@
+{
+  "name": "citation-generator",
+  "version": "1.0.0",
+  "description": "A simple Chrome extension for generating citations from URLs.",
+  "main": "popup.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carpasse/citation-generator.git"
+  },
+  "keywords": [
+    "citation",
+    "generator",
+    "chrome",
+    "extension"
+  ],
+  "author": "Carpasse <carpasse@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/carpasse/citation-generator/issues"
+  },
+  "homepage": "https://github.com/carpasse/citation-generator#readme",
+  "dependencies": {},
+  "devDependencies": {}
+}
