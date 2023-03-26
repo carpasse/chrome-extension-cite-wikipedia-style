@@ -13,6 +13,16 @@ document.addEventListener("DOMContentLoaded", function () {
     .addEventListener("input", generateCitation);
 });
 
+function getTitleFromAnchoredElement(doc, anchor) {
+  const anchoredElement = doc.getElementById(anchor);
+
+  if (anchoredElement) {
+    return anchoredElement.textContent.replace("\n", " ");
+  }
+
+  return null;
+}
+
 function generateCitation() {
   const inputUrl = document.getElementById("inputUrl").value;
 
@@ -36,12 +46,19 @@ function generateCitation() {
       if (!author) {
         author = url.hostname.replace(/^www\./, "");
       }
+      let title;
 
-      const title = doc.querySelector("meta[property='og:title']")
-        ? doc.querySelector("meta[property='og:title']").content
-        : doc.querySelector("title")
-        ? doc.querySelector("title").textContent
-        : "Unknown Title";
+      if (url.hash) {
+        title = getTitleFromAnchoredElement(doc, url.hash.slice(1));
+      }
+
+      if (!title) {
+        title = doc.querySelector("meta[property='og:title']")
+          ? doc.querySelector("meta[property='og:title']").content
+          : doc.querySelector("title")
+          ? doc.querySelector("title").textContent
+          : "Unknown Title";
+      }
 
       const publisher = doc.querySelector("meta[property='og:site_name']")
         ? doc.querySelector("meta[property='og:site_name']").content
@@ -51,7 +68,7 @@ function generateCitation() {
 
       const date = new Date();
 
-      const citation = `[${author}. "${title}"${
+      const citation = `[${author} "${title}"${
         publisher ? ` (${publisher})` : ""
       }.](${url}) Accessed at ${accessDate}.`;
 
