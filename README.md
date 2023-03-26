@@ -1,6 +1,6 @@
 # chrome-extension-cite-wikipedia-style
 
-Chrome extension to create cites in Markdown following wikipedia style
+A simple Chrome extension for generating citations from URLs.
 
 # Icons Attribution
 
