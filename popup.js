@@ -70,7 +70,7 @@ function generateCitation() {
 
       const citation = `[${author} "${title}"${
         publisher ? ` (${publisher})` : ""
-      }.](${url}) Accessed at ${accessDate}.`;
+      }.](${url}) Retrieved ${accessDate}.`;
 
       document.getElementById("authorInput").value = author;
       document.getElementById("titleInput").value = title;
