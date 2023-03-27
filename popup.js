@@ -77,7 +77,7 @@ function generateCitation() {
 
       document.getElementById("authorInput").value = author;
       document.getElementById("titleInput").value = title;
-      document.getElementById("dateInput").value = date.toLocaleDateString();
+      document.getElementById("dateInput").value = formatAccessDate(date);
       document.getElementById("citation").innerText = citation;
       document.getElementById("copy").disabled = false;
     })
@@ -108,11 +108,25 @@ function updateCitation() {
   const title = document.getElementById("titleInput").value;
   const inputUrl = document.getElementById("inputUrl").value;
   const url = new URL(inputUrl);
-  const accessDate = new Date().toISOString().slice(0, 10);
+  const accessDate = formatAccessDate(new Date());
 
   const citation = `[${author} "${title}"].](${url}) Retrieved ${accessDate}.`;
 
   document.getElementById("citation").innerText = citation;
 }
+
+function formatAccessDate(date) {
+  const monthNames = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+
+  const day = date.getDate();
+  const monthIndex = date.getMonth();
+  const year = date.getFullYear();
+
+  return `${monthNames[monthIndex]} ${day}, ${year}`;
+}
+
 
 document.getElementById("copy").addEventListener("click", copyCitation);
