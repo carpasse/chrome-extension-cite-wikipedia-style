@@ -39,13 +39,10 @@ function generateCitation() {
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, "text/html");
 
-      let author = doc.querySelector("meta[name='author']")
+      const author = doc.querySelector("meta[name='author']")
         ? doc.querySelector("meta[name='author']").content
         : null;
 
-      if (!author) {
-        author = url.hostname.replace(/^www\./, "");
-      }
       let title;
 
       if (url.hash) {
@@ -64,11 +61,11 @@ function generateCitation() {
         ? doc.querySelector("meta[property='og:site_name']").content
         : doc.querySelector("meta[name='publisher']")
         ? doc.querySelector("meta[name='publisher']").content
-        : null;
+        : url.hostname.replace(/^www\./, "");
 
       const date = new Date();
 
-      const citation = `[${author} "${title}"${
+      const citation = `[${author ? `${author} ` : ""}"${title}"${
         publisher ? ` (${publisher})` : ""
       }.](${url}) Retrieved ${accessDate}.`;
 
