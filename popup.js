@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .getElementById("inputUrl")
     .addEventListener("input", generateCitation);
 
-  const inputs = document.querySelectorAll('#authorInput, #titleInput, #dateInput');
+  const inputs = document.querySelectorAll('#authorInput, #titleInput, #dateInput, #publisherInput');
 
   for (const input of inputs) {
     input.addEventListener('input', updateCitation);
@@ -37,7 +37,7 @@ function generateCitation() {
   }
 
   const url = new URL(inputUrl);
-  const accessDate = new Date().toISOString().slice(0, 10);
+  const accessDate = formatAccessDate(new Date());
 
   fetch(url)
     .then((response) => response.text())
@@ -63,21 +63,19 @@ function generateCitation() {
           : "Unknown Title";
       }
 
+      const domain = url.hostname.replace(/^www\./, "");
       const publisher = doc.querySelector("meta[property='og:site_name']")
         ? doc.querySelector("meta[property='og:site_name']").content
         : doc.querySelector("meta[name='publisher']")
         ? doc.querySelector("meta[name='publisher']").content
-        : url.hostname.replace(/^www\./, "");
+        : domain;
 
-      const date = new Date();
-
-      const citation = `[${author ? `${author} ` : ""}"${title}"${
-        publisher ? ` (${publisher})` : ""
-      }.](${url}) Retrieved ${accessDate}.`;
+      const citation = `[${!!author ? `${author} ` : ""}"${title}"(${publisher}).](${url}) Retrieved ${accessDate}.`;
 
       document.getElementById("authorInput").value = author;
       document.getElementById("titleInput").value = title;
-      document.getElementById("dateInput").value = formatAccessDate(date);
+      document.getElementById("dateInput").value = accessDate;
+      document.getElementById("publisherInput").value = publisher;
       document.getElementById("citation").innerText = citation;
       document.getElementById("copy").disabled = false;
     })
