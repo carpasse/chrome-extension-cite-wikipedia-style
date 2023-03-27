@@ -11,6 +11,12 @@ document.addEventListener("DOMContentLoaded", function () {
   document
     .getElementById("inputUrl")
     .addEventListener("input", generateCitation);
+
+  const inputs = document.querySelectorAll('#authorInput, #titleInput, #dateInput');
+
+  for (const input of inputs) {
+    input.addEventListener('input', updateCitation);
+  }
 });
 
 function getTitleFromAnchoredElement(doc, anchor) {
@@ -95,6 +101,18 @@ async function copyCitation() {
   } catch (err) {
     console.error("Failed to copy text: ", err);
   }
+}
+
+function updateCitation() {
+  const author = document.getElementById("authorInput").value;
+  const title = document.getElementById("titleInput").value;
+  const inputUrl = document.getElementById("inputUrl").value;
+  const url = new URL(inputUrl);
+  const accessDate = new Date().toISOString().slice(0, 10);
+
+  const citation = `[${author} "${title}"].](${url}) Retrieved ${accessDate}.`;
+
+  document.getElementById("citation").innerText = citation;
 }
 
 document.getElementById("copy").addEventListener("click", copyCitation);
