@@ -12,10 +12,12 @@ document.addEventListener("DOMContentLoaded", function () {
     .getElementById("inputUrl")
     .addEventListener("input", generateCitation);
 
-  const inputs = document.querySelectorAll('#authorInput, #titleInput, #dateInput, #publisherInput');
+  const inputs = document.querySelectorAll(
+    "#authorInput, #titleInput, #dateInput, #publisherInput"
+  );
 
   for (const input of inputs) {
-    input.addEventListener('input', updateCitation);
+    input.addEventListener("input", updateCitation);
   }
 });
 
@@ -70,7 +72,9 @@ function generateCitation() {
         ? doc.querySelector("meta[name='publisher']").content
         : domain;
 
-      const citation = `[${!!author ? `${author} ` : ""}"${title}"(${publisher}).](${url}) Retrieved ${accessDate}.`;
+      const citation = `[${
+        !!author ? `${author} ` : ""
+      }"${title}" (${publisher}).](${url}) Retrieved ${accessDate}.`;
 
       document.getElementById("authorInput").value = author;
       document.getElementById("titleInput").value = title;
@@ -115,8 +119,18 @@ function updateCitation() {
 
 function formatAccessDate(date) {
   const monthNames = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
 
   const day = date.getDate();
@@ -125,6 +139,5 @@ function formatAccessDate(date) {
 
   return `${monthNames[monthIndex]} ${day}, ${year}`;
 }
-
 
 document.getElementById("copy").addEventListener("click", copyCitation);
